@@ -7,9 +7,8 @@ router.route('/')
   .post(activitiesController.create)
 
 // Matches with '/api/activities/:id'
-router
-//   .route('/:id')
-//   .get(activitiesController.findById)
+router.route('/:id')
+  .get(activitiesController.findById)
 //   .put(activitiesController.update)
 //   .delete(activitiesController.remove);
 

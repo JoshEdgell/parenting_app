@@ -13,5 +13,11 @@ module.exports = {
             .create(req.body)
             .then(newActivity => res.json(newActivity))
             .catch(error => res.status(422).json(error));
+    },
+    findById: function(req,res) {
+        db.Activity
+            .findById(req.params.id)
+            .then(foundActivity => res.json(foundActivity))
+            .catch(error => res.status(422).json(error))
     }
 }
