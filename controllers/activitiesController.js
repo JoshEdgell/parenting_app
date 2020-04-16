@@ -20,6 +20,14 @@ module.exports = {
             .catch(error => res.status(422).json(error))
     },
     search: function(req,res) {
-        res.send('search route hit')
+        let searchObject = req.query;
+        // Replace all values with an array of the different search values
+        Object.keys(searchObject).forEach(key => {
+            searchObject[key] = searchObject[key].split(' ');
+        });
+        searchObject.allSupplies[0] == 'true' ? searchObject.allSupplies = true : searchObject.allSupplies = false;
+        searchObject.allTags[0] == 'true' ? searchObject.allTags = true : searchObject.allTags = false;
+
+        res.send(searchObject)
     }
 }

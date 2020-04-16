@@ -6,9 +6,10 @@ router.route('/')
   .get(activitiesController.findAll)
   .post(activitiesController.create)
 
-// Matches with '/api/activities/search/:id'
+// Matches with '/api/activities/search'
 router.route('/search')
   .get(activitiesController.search)
+
 // Matches with '/api/activities/:id'
 router.route('/:id')
   .get(activitiesController.findById)
