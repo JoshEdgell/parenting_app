@@ -2,11 +2,10 @@ const db = require('../models');
 
 module.exports = {
     findAll: function(req,res) {
-        res.send('findAll route hit')
-        // db.Activity
-        // .find(req.query)
-        // .then(dbModel => res.json(dbModel))
-        // .catch(error => res.status(422).json(error))
+        db.Activity
+        .find(req.query)
+        .then(dbModel => res.json(dbModel))
+        .catch(error => res.status(422).json(error))
     },
     create: function(req,res) {
         db.Activity
@@ -16,8 +15,11 @@ module.exports = {
     },
     findById: function(req,res) {
         db.Activity
-            .findById(req.params.id)
+            .find({_id: req.params.id})
             .then(foundActivity => res.json(foundActivity))
             .catch(error => res.status(422).json(error))
+    },
+    search: function(req,res) {
+        res.send('search route hit')
     }
 }

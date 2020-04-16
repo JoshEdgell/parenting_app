@@ -6,6 +6,9 @@ router.route('/')
   .get(activitiesController.findAll)
   .post(activitiesController.create)
 
+// Matches with '/api/activities/search/:id'
+router.route('/search')
+  .get(activitiesController.search)
 // Matches with '/api/activities/:id'
 router.route('/:id')
   .get(activitiesController.findById)
