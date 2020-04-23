@@ -35,7 +35,7 @@ module.exports = {
             .then(foundActivities => {
                 let returnArray = [];
                 if (searchObject.allSupplies) {
-                    // Exclusive supply search
+                    // Exclusive supply search - any activities found consist only of supplies the user has
                     for (let i = 0; i < foundActivities.length; i++) {
                         
                         if (_.intersection(searchObject.supplies, foundActivities[i].supplies).length == foundActivities[i].supplies.length) {
@@ -43,7 +43,7 @@ module.exports = {
                         }
                     }
                 } else {
-                    // Inclusive supply search
+                    // Inclusive supply search - any activities found consist of at least one activity the user has searched
                     for (let i = 0; i < foundActivities.length; i++) {
                         if (_.intersection(searchObject.supplies, foundActivities[i].supplies).length > 0) {
                             returnArray.push(foundActivities[i])
