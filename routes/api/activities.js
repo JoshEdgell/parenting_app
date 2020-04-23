@@ -6,10 +6,13 @@ router.route('/')
   .get(activitiesController.findAll)
   .post(activitiesController.create)
 
-// Matches with '/api/activities/search'
+// Matches with '/api/activities/search/supplies'
 router.route('/search/supplies')
-  .get(activitiesController.search)
+  .get(activitiesController.supplySearch)
 
+// Matches with '/api/activities/search/tags'
+router.route('/search/tags')
+  .get(activitiesController.tagSearch)
 // Matches with '/api/activities/:id'
 router.route('/:id')
   .get(activitiesController.findById)

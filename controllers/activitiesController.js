@@ -20,16 +20,12 @@ module.exports = {
             .then(foundActivity => res.json(foundActivity))
             .catch(error => res.status(422).json(error))
     },
-    search: function(req,res) {
+    supplySearch: function(req,res) {
         let searchObject = req.query;
         // Replace all values with an array of the different search values
-        Object.keys(searchObject).forEach(key => {
-            searchObject[key] = searchObject[key].split(' ');
-        });
-        // "allSupplies" and "allTags" are booleans - if set to "true," their searches need to be exclusive; if set to "false", their searches need to be inclusive
-        searchObject.allSupplies[0] == 'true' ? searchObject.allSupplies = true : searchObject.allSupplies = false;
-        searchObject.allTags[0] == 'true' ? searchObject.allTags = true : searchObject.allTags = false;
-        console.log(searchObject, `searchObject`)
+        searchObject.supplies = searchObject.supplies.split(' ');
+        // "allSupplies" is a boolean - if set to "true," the search needs to be exclusive; if set to "false", their search needs to be inclusive
+        searchObject.allSupplies == 'true' ? searchObject.allSupplies = true : searchObject.allSupplies = false;
         db.Activity
             .find()
             .then(foundActivities => {
@@ -51,6 +47,25 @@ module.exports = {
                     }
                 }
 
+                res.send(returnArray)
+            })
+            .catch(error => res.status(422).json(error))
+    },
+    tagSearch: function(req,res) {
+        console.log("tag search hit")
+        let searchObject = req.query;
+        // Replace all values with an array of the different search values
+        searchObject.tags = searchObject.tags.split(' ');
+        db.Activity
+            .find()
+            .then(foundActivities => {
+                let returnArray = [];
+                // Inclusive tag search - any activities found consist of at least one tag the user has searched
+                for (let i = 0; i < foundActivities.length; i++) {
+                    if (_.intersection(searchObject.tags, foundActivities[i].tags).length > 0) {
+                        returnArray.push(foundActivities[i])
+                    }
+                }
                 res.send(returnArray)
             })
             .catch(error => res.status(422).json(error))
