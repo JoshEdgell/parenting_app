@@ -20,6 +20,14 @@ module.exports = {
             .then(foundActivity => res.json(foundActivity))
             .catch(error => res.status(422).json(error))
     },
+    remove: function(req, res) {
+        console.log("delete route hit")
+        db.Activity
+          .findById({ _id: req.params.id })
+          .then(foundActivity => foundActivity.remove())
+          .then(foundActivity => res.json(foundActivity))
+          .catch(error => res.status(422).json(error));
+    },
     supplySearch: function(req,res) {
         let searchObject = req.query;
         // Replace all values with an array of the different search values

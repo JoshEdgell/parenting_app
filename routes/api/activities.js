@@ -17,6 +17,6 @@ router.route('/search/tags')
 router.route('/:id')
   .get(activitiesController.findById)
 //   .put(activitiesController.update)
-//   .delete(activitiesController.remove);
+  .delete(activitiesController.remove);
 
 module.exports = router;
