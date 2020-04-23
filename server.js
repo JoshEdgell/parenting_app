@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect('mongodb://localhost/parenting_app', { useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost/parenting_app', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 mongoose.connection.once('open', () =>{
   console.log(`Parenting App Database Open`)

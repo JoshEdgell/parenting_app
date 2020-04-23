@@ -20,8 +20,13 @@ module.exports = {
             .then(foundActivity => res.json(foundActivity))
             .catch(error => res.status(422).json(error))
     },
+    update: function(req, res) {
+        db.Activity
+          .findOneAndUpdate({ _id: req.params.id }, req.body)
+          .then(foundActivity => res.send("activity updated"))
+        .catch(error => res.status(422).json(error));
+    },
     remove: function(req, res) {
-        console.log("delete route hit")
         db.Activity
           .findById({ _id: req.params.id })
           .then(foundActivity => foundActivity.remove())

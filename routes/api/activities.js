@@ -16,7 +16,7 @@ router.route('/search/tags')
 // Matches with '/api/activities/:id'
 router.route('/:id')
   .get(activitiesController.findById)
-//   .put(activitiesController.update)
+  .put(activitiesController.update)
   .delete(activitiesController.remove);
 
 module.exports = router;
