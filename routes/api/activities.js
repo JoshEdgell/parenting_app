@@ -13,6 +13,7 @@ router.route('/search/supplies')
 // Matches with '/api/activities/search/tags'
 router.route('/search/tags')
   .get(activitiesController.tagSearch)
+  
 // Matches with '/api/activities/:id'
 router.route('/:id')
   .get(activitiesController.findById)

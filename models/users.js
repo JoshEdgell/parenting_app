@@ -4,6 +4,7 @@ const Activity = require('./activities')
 
 const userSchema = new Schema({
     username: String,
+    password: String,
     firstName: String,
     lastName: String,
     favorites: [Activity.schema],

@@ -22,16 +22,16 @@ module.exports = {
     },
     update: function(req, res) {
         db.Activity
-          .findOneAndUpdate({ _id: req.params.id }, req.body)
-          .then(foundActivity => res.send("activity updated"))
-        .catch(error => res.status(422).json(error));
+            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .then(foundActivity => res.send("activity updated"))
+            .catch(error => res.status(422).json(error));
     },
     remove: function(req, res) {
         db.Activity
-          .findById({ _id: req.params.id })
-          .then(foundActivity => foundActivity.remove())
-          .then(foundActivity => res.json(foundActivity))
-          .catch(error => res.status(422).json(error));
+            .findById({ _id: req.params.id })
+            .then(foundActivity => foundActivity.remove())
+            .then(foundActivity => res.json(foundActivity))
+            .catch(error => res.status(422).json(error));
     },
     supplySearch: function(req,res) {
         let searchObject = req.query;
