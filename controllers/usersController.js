@@ -26,7 +26,8 @@ module.exports = {
             .catch(error => res.status(422).json(error))
     },
     login: function(req,res) {
-        console.log('login route hit');
+        console.log("login route hit");
+        console.log(req.body);
         db.User
             .findOne({username: req.body.username})
             .then(foundUser => {
