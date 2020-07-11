@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export default {
     login: function() {
-        return axios.post('/api/users/login');
+        console.log("hitting login route in utils")
+        return axios.post('api/users/login');
     }
 }

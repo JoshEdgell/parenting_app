@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import API from '../../utils/API'
 
 class Login extends Component {
-    state = {
-        username: '',
-        password: ''
+    constructor(props) {
+        super(props);
+        this.state =  {
+            username: '',
+            password: ''
+        }
+    }
+
+    componentDidMount = () => {
+        console.log(this.props)
     }
 
     handleInputChange = event => {
@@ -18,19 +24,22 @@ class Login extends Component {
 
     handleFormSubmit = event => {
         event.preventDefault();
-        API.login({
-            username: this.state.username,
-            password: this.state.password
-        })
-        .then(response => {
-            console.log("login successful")
-        })
-        .catch(error => {
-            console.log(error, "login error");
-        })
+        this.props.login();
     }
 
     render() {
+
+        let userPrompt = '';
+        let passwordPrompt = '';
+
+        if (!this.props.userFound) {
+            userPrompt = "User Not Found"
+        }
+
+        if (!this.props.passwordValid) {
+            passwordPrompt = "Incorrect Password"
+        }
+
         return(
             <Form id='loginForm'>
                 <FormGroup>
@@ -43,7 +52,8 @@ class Login extends Component {
                         id='username' 
                         placeholder='Enter username' 
                     />
-                    <FormText color='danger'>User not found</FormText>
+                    <FormText color='danger'> { userPrompt } </FormText>
+                    {/* { userAlert } */}
                 </FormGroup>
                 <FormGroup>
                     <Label for='password'>Password</Label>
@@ -55,7 +65,8 @@ class Login extends Component {
                         id='password' 
                         placeholder='Enter password' 
                     />
-                    <FormText color='danger'>Incorrect password</FormText>
+                    <FormText color='danger'> { passwordPrompt } </FormText>
+                    {/* { passwordAlert } */}
                 </FormGroup>
                 <Button id='loginButton' onClick={this.handleFormSubmit}>Login</Button>
             </Form>
